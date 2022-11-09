@@ -22,6 +22,6 @@ connection.connect((err)=>{
         console.log("Connected to database");
     }
 });
+// console.log(connection);
 
-
-mysql.exports=connection;
+module.exports=connection;

@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const employeeController = require("../controllers/employeeController");
+const {authorize}= require('../middlewareUtilityFunctions/verifyToken');
+
 //signUp
 router.post('/signUp', employeeController.signUp);
 
@@ -7,15 +9,16 @@ router.post('/signUp', employeeController.signUp);
 router.post('/login', employeeController.login);
 
 //updateProfile
-router.post('/updateProfile',employeeController.updateProfile);
+router.post('/updateProfile', authorize, employeeController.updateProfile);
 
 //new courier registration for transport
-router.post('/createCourier', employeeController.createCourier);   
+router.post('/createCourier',authorize, employeeController.createCourier);   
 
 //filter couriers by query parameters 
-router.get('/filterCourierData', employeeController.filterCourierData);
+router.post('/filterCourierData', authorize, employeeController.filterCourierData);
 
 //updating the status of the courier transportation
-router.post('/updateCourierStatus', employeeController.updateCourierStatus);
+router.post('/updateCourierStatus', authorize, employeeController.updateCourierStatus);
+
 
 module.exports=router;
